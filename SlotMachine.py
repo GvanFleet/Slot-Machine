@@ -2,20 +2,20 @@ import random
 
 
 MAX_LINES = 3
-MAX_BET = 500
+MAX_BET = 1000
 MIN_BET = 10
 
 ROWS = 3
 COLS = 3
 
-symbol_count =  {
+symbol_count =  {           #How many symbols are allowed to generate
     "A": 2,
     "B": 4,
     "C": 6,
     "D": 8
 }
 
-symbol_value =  {
+symbol_value =  {           #How much to multiply symbols on 3 matching in a single line
     "A": 5,
     "B": 4,
     "C": 3,
@@ -23,7 +23,7 @@ symbol_value =  {
 }
 
 
-def check_winnings(columns, lines, bet, values):
+def check_winnings(columns, lines, bet, values):            #
     winnings = 0
     winning_lines = []
     for line in range(lines):
@@ -50,9 +50,9 @@ def get_slot_machine_spin(rows, cols, symbols):
         column = []
         current_symbols = all_symbols[:]
         for _ in range(rows):
-            value = random.choice(current_symbols)
-            current_symbols.remove(value)
-            column.append(value)
+            value = random.choice(current_symbols)      #Randomly selects symbols for spin based on how many lines are selected
+            current_symbols.remove(value)       #Removes symbols out of the selection pool
+            column.append(value)        
 
         columns.append(column)
             
@@ -77,8 +77,8 @@ def print_slot_machine(columns):
 def deposit():
     while True:
         amount = input("How much would you like to deposit? $ ")
-        if amount.isdigit():
-            amount = int(amount)
+        if amount.isdigit():      #.isdigit ensures the input amount is a number  
+            amount = int(amount)        #int(amount) ensures the input amount is a whole number
             if amount > 0:
                 break
             else:
@@ -94,8 +94,8 @@ def deposit():
 def get_number_of_lines():
     while True:
         lines = input("Enter the number of lines to bet on (1-" + str(MAX_LINES) + ")? ")
-        if lines.isdigit():
-            lines = int(lines)
+        if lines.isdigit():      #.isdigit ensures the input amount is a number
+            lines = int(lines)     #int(lines) ensures the input amount is a whole number 
             if 1 <= lines <= MAX_LINES:
                 break
             else:
@@ -111,8 +111,8 @@ def get_number_of_lines():
 def get_bet():
     while True:
         amount = input("How much would you like to bet on each line? $ ")
-        if amount.isdigit():
-            amount = int(amount)
+        if amount.isdigit():            #.isdigit ensures the input amount is a number
+            amount = int(amount)        #int(amount) ensures the input amount is a whole number
             if MIN_BET <= amount <= MAX_BET:
                 break
             else:
@@ -142,7 +142,7 @@ def spin(balance):
     return winnings - total_bet
 
 
-def main():
+def main():                 #Start of game; user input first
     balance = deposit()
     while True:
         print(f"Current balance is ${balance}")
